@@ -1,5 +1,6 @@
 ﻿// Author:  Kyle Chapman
 // Date:    January 18, 2021
+// Modified:    September 20, 2024
 // Description:
 //  This totally absurd application is designed to tell you
 //  whether an entered name is a valid name for someone in
@@ -28,6 +29,7 @@ namespace ChapmanNames
         public formChapmanNames()
         {
             InitializeComponent();
+            textBoxNameInput.Focus();
         }
 
         /// <summary>
@@ -37,7 +39,10 @@ namespace ChapmanNames
         /// <param name="e"></param>
         private void ButtonExitClick(object sender, EventArgs e)
         {
-            Close();
+            if (MessageBox.Show("Are you sure you want to exit?", "Quit?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Close();
+            }
         }
 
         /// <summary>
@@ -47,14 +52,14 @@ namespace ChapmanNames
         /// <param name="e"></param>
         private void ButtonResetClick(object sender, EventArgs e)
         {
-            // Clear all input and output fields.
+            // Clearing input.
             textBoxNameInput.Clear();
-            textBoxNameList.Clear();
-            labelOutput.Text = String.Empty;
+            textBoxNameList.Text = String.Empty;
 
-            // Reset the global variables.
-            totalLength = 0;
-            validNamesAccepted = 0;
+            // Clearing output.
+            labelOutput.Text = String.Empty;
+            // If this were in WPF, you'd use this:
+            // labelOutput.Content = String.Empty;
 
             // Set focus.
             textBoxNameInput.Focus();
